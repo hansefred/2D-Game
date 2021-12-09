@@ -38,6 +38,18 @@
 /processorParam:TextureFormat=Color
 /build:Explosion.png
 
+#begin Ground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Ground.png
+
 #begin Life.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -62,6 +74,18 @@
 /processorParam:TextureFormat=Color
 /build:Player.png
 
+#begin Spawner.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Spawner.bmp
+
 #begin Test.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -73,4 +97,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Test.png
+
+#begin Water.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Water.png
 

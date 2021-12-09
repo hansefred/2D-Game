@@ -20,7 +20,6 @@ namespace GameEngine.Service
             builder.RegisterInstance<GraphicsDeviceManager>(graphicsDeviceManager);
             builder.RegisterInstance<SpriteBatch>(spriteBatch);
             builder.RegisterInstance<GraphicsDevice>(game.GraphicsDevice).SingleInstance();
-            builder.RegisterType<PlayerManager>().SingleInstance();
             builder.RegisterType<GameObjectManager>().SingleInstance();
             builder.RegisterType<GameObject>();
             builder.RegisterType<UIService>();

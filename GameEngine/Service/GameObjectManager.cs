@@ -13,14 +13,17 @@ namespace GameEngine.Service
         #region private
         private List<GameObject> _gameObjects = new List<GameObject>();
         private readonly SpriteBatch _spriteBatch;
+        private readonly Game _game;
+
 
         #endregion
 
         #region Konstruktor
 
-        public GameObjectManager(SpriteBatch spriteBatch)
+        public GameObjectManager(SpriteBatch spriteBatch, Game game)
         {
             _spriteBatch = spriteBatch;
+            _game = game;
         }
         #endregion
 
@@ -42,13 +45,16 @@ namespace GameEngine.Service
 
             CheckHit();
             ClearDead();
+            SpawnEnemy();
         }
 
         public void Render()
         {
-            foreach (GameObject gameObject in _gameObjects)
+            foreach (GameObject gameObject in _gameObjects.OrderBy ( o => o.Layer))
             {
+              
                 gameObject.Render(_spriteBatch);
+             
             }
 
         }
@@ -67,7 +73,7 @@ namespace GameEngine.Service
             var player = GetPlayer();
             if (player != null)
             {
-                foreach (Enemy Enemy in _gameObjects.Where(o => o is Enemy && o.Status == ObjectStatus.Alive))
+                foreach (Enemy Enemy in _gameObjects.Where(o => o is Enemy && (o as Enemy).Status == DestroyableObjectStatus.Alive))
                 {
                     player.CheckHit(Enemy);
 
@@ -79,10 +85,29 @@ namespace GameEngine.Service
         {
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if (!_gameObjects[i].isAlive)
+                if (_gameObjects[i] is DestroyableGameObjects)
                 {
-                    _gameObjects.RemoveAt(i);
+                    if (!(_gameObjects[i] as DestroyableGameObjects).isAlive)
+                    {
+                        _gameObjects.RemoveAt(i);
+                    }
                 }
+            }
+        }
+
+
+        private void SpawnEnemy ()
+        {
+
+            List<GameObject> SpawnerCollection = _gameObjects.Where(o => o is Spawner).ToList();
+
+            foreach (GameObject Spawner in SpawnerCollection)
+            {
+                if ((Spawner as Spawner).IsReadyToSpawn())
+                {
+                    _gameObjects.Add(new Enemy(Spawner.Position, new Vector2(50, 50), 100, new Vector2(), 2, new Animation(_game.Content.Load<Texture2D>("Enemy"), new Vector2(100, 100)), new Animation(_game.Content.Load<Texture2D>("Explosion"), new Vector2(100, 100)), GetPlayer()));
+                }
+
             }
         }
 

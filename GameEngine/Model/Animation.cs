@@ -24,7 +24,7 @@ namespace GameEngine.Model
         private Texture2D _texture2D;
         private TimeSpan _timeperframe = new TimeSpan ();
 
-        
+
 
 
 
@@ -40,11 +40,16 @@ namespace GameEngine.Model
         #region Konstruktor
 
 
+
+
+
+
         public Animation(Texture2D Texture, Vector2 size)
         {
          
             _currentFrame = 1;
             _texture2D = Texture;
+  
   
             Counter = 0;
            string definitionfile = $@"Content\{Texture.Name}_definition.json";
@@ -91,7 +96,7 @@ namespace GameEngine.Model
         public void Render (SpriteBatch spriteBatch,GameObject gameObject)
         {
 
-            spriteBatch.Draw(_texture2D, gameObject.Position, SpriteSizes[_currentFrame - 1], Color.White, (float)gameObject.Rotation, new Vector2(SpriteSizes[0].Width / 2, SpriteSizes[0].Height / 2), gameObject.CurrentAnimation.Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(_texture2D, gameObject.Position, SpriteSizes[_currentFrame - 1], Color.White, (float)gameObject.Rotation, new Vector2(SpriteSizes[0].Width / 2, SpriteSizes[0].Height / 2), Scale, SpriteEffects.None, 0);
         }
     }
 

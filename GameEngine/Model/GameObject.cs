@@ -13,7 +13,7 @@ namespace GameEngine.Model
         #region readonly
 
 
-        private Vector2 _size;
+        internal Vector2 _size;
 
        
 
@@ -26,17 +26,17 @@ namespace GameEngine.Model
         }
 
 
-        public GameObject(Vector2 position, Vector2 size, float speed, Vector2 direction,int hitPoint , Animation currentAnimation, Animation onDestroyAnimation)
+        public GameObject(Vector2 position, Vector2 size, float speed, Vector2 direction , Animation currentAnimation, int layer = 0)
         {
-            OnDestroyAnimation = onDestroyAnimation;
+           
+            Layer = layer;
             Position = position;
             Speed = speed;
             Direction = direction;
-            HitPoint = hitPoint;
             _size = size;
             CurrentAnimation = currentAnimation;
 
-            Status = ObjectStatus.Alive;
+  
 
         }
 
@@ -45,25 +45,20 @@ namespace GameEngine.Model
         #region Property
 
         public Animation CurrentAnimation { get; set; }
-        public Animation OnDestroyAnimation { get; set;}
+       
 
-    public Vector2 Position { get; set; }
+        public Vector2 Position { get; set; }
 
-        public Rectangle BoxCollider { get { return new Rectangle((int)Position.X, (int)Position.Y, (int)_size.X, (int)_size.Y); } }
+    
         public float Speed { get; set; }
         public Vector2 Direction { get; set; }
 
         public double Rotation { get; set; }
 
-        public int HitPoint { get; set; }
-
-        public ObjectStatus Status { get; set; }
+        public int Layer { get; set; }
 
 
-        public bool isAlive
-        {
-            get {   if (HitPoint < 1 && Status == ObjectStatus.Dead) return false; else return true; }
-        }
+       
 
 
 
@@ -84,16 +79,7 @@ namespace GameEngine.Model
                 CurrentAnimation.Update (gameTime);
             }
 
-            if (HitPoint < 1 && Status == ObjectStatus.Alive)
-            {
-                Status = ObjectStatus.OnDestroy;
-                CurrentAnimation = OnDestroyAnimation;
-            }
-
-            if (Status == ObjectStatus.OnDestroy && CurrentAnimation.Counter >= 1)
-            {
-                Status = ObjectStatus.Dead;
-            }
+          
         }
 
         public virtual void Render (SpriteBatch spriteBatch)
@@ -104,35 +90,15 @@ namespace GameEngine.Model
             }
         }
 
-        public void CheckHit (GameObject gameObject)
-        {
-            if (BoxCollider.Intersects(gameObject.BoxCollider))
-            {
-                Hit();
-                gameObject.Hit();
-            }
-        }
+     
 
 
 
         #endregion
 
 
-        #region private Methode
-        private void Hit()
-        {
-            HitPoint--;
-
-        }
-
-
-        #endregion
+       
     }
 
-    public enum ObjectStatus
-    {
-        Alive,
-        OnDestroy,
-        Dead
-    }
+    
 }

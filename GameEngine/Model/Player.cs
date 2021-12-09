@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GameEngine.Model
 {
-    public class Player : GameObject
+    public class Player : DestroyableGameObjects
     {
         #region Property 
         private PlayerInputSettings _playerInputSettings { get; set; } = new PlayerInputSettings();

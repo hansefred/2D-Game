@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GameEngine.Model
 {
-    internal class Enemy : GameObject
+    internal class Enemy : DestroyableGameObjects
     {
         #region readonly
 
@@ -24,10 +24,7 @@ namespace GameEngine.Model
 
         #region Konstruktor
 
-        public Enemy(Player player)
-        {
-            _player = player;
-        }
+
 
        
         public Enemy(Vector2 position, Vector2 size, float speed, Vector2 direction, int hitPoint, Animation defaultAnimation, Animation onDestroyAnimation,Player player) : base(position, size, speed, direction, hitPoint, defaultAnimation,onDestroyAnimation)
@@ -42,7 +39,7 @@ namespace GameEngine.Model
 
         public override void Update(GameTime gameTime)
         {
-            if (this.Status == ObjectStatus.Alive)
+            if (this.Status == DestroyableObjectStatus.Alive)
             {
                 Direction = GameObjectHelper.GetDirection(this, _player);
                 Rotation = GameObjectHelper.GetRotation(this, _player);

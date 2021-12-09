@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
@@ -27,4 +27,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties map_4test_3definition_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
 </Project>

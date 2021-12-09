@@ -1,11 +1,12 @@
 ﻿using Autofac;
 using GameEngine.HUDs;
 using GameEngine.Model;
+using GameEngine.Model.MapDefinitions;
 using GameEngine.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Myra.Graphics2D.UI;
+using System;
 
 namespace GameEngine
 {
@@ -18,6 +19,7 @@ namespace GameEngine
         private UIService _uiService;
 
 
+
         #region Public Property
         public GameData GameData;
         #endregion
@@ -27,6 +29,27 @@ namespace GameEngine
 
         public Game1()
         {
+            //MapDefinition map = new MapDefinition();
+
+            //for (int i = 0; i <= 100; i++)
+            //{
+            //    for (int j = 0; j <= 100; j++)
+            //    {
+            //        if (i % 2 == 0)
+            //            map.MapObjects.Add(new Map_Object() { MapPosition = new Vector2(j, i), TextureName = "Ground" });
+            //        if (i % 2 == 1)
+            //            map.MapObjects.Add(new Map_Object() { MapPosition = new Vector2(j, i), TextureName = "Water" });
+
+
+            //        if (i == 100 && j == 100)
+            //            map.MapObjects.Add(new Map_Spawner() { MapPosition = new Vector2(j, i), TextureName = "Spawner",MaxEnemy = 2, SpawnTimer = TimeSpan.FromMinutes(1)});
+            //    }
+            //}
+
+            //Map.SaveMap("test", map);
+
+
+
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -50,15 +73,20 @@ namespace GameEngine
             _container = ServiceRegister.Register(this,_graphics,_spriteBatch);
             _gameObjecManager = _container.Resolve<GameObjectManager>();
 
+            
+            
 
 
             var player = new Player(new Vector2(100, 100), new Vector2(50, 50), 100, new Vector2(), 5, new Animation(Content.Load<Texture2D>("Player"), new Vector2(100, 100)), new Animation(Content.Load<Texture2D>("Explosion"), new Vector2(100, 100)));
             _gameObjecManager.Add(player);
-            _gameObjecManager.Add(new Enemy(new Vector2(500, 100), new Vector2(50, 50), 100, new Vector2(), 2, new Animation (Content.Load<Texture2D>("Enemy"), new Vector2 (100,100)), new Animation(Content.Load<Texture2D>("Explosion"), new Vector2(100, 100)), player));
+           
 
 
             _uiService = _container.Resolve<UIService>();
             _uiService.ChangeUI(new IngameHUD(_container.Resolve<Game1>(),_container.Resolve<GameObjectManager>().GetPlayer()));
+
+            var map = Map.LoadMap("Test", this);
+            map.MapObjects.ForEach(o => _gameObjecManager.Add(o));
 
             // TODO: use this.Content to load your game content here
         }
@@ -75,7 +103,8 @@ namespace GameEngine
 
             _gameObjecManager.Update(gameTime);
             _uiService.Update(gameTime);
-            
+
+
             base.Update(gameTime);
         }
 
@@ -83,11 +112,17 @@ namespace GameEngine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Immediate);
             // TODO: Add your drawing code here
-            _uiService.Render();
+
+
+
             _gameObjecManager.Render();
-       
+            _uiService.Render();
+
+
+
+
 
             _spriteBatch.End();
 

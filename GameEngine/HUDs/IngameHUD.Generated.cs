@@ -73,16 +73,19 @@ namespace GameEngine.HUDs
 			//Score
 			_Score = new Label();
 			_Score.Text = "0";
+			_Score.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
 			var HorizontalStackPanel = new HorizontalStackPanel();
-			HorizontalStackPanel.Widgets.Add(new Label() { Text = "Score: "});
+			HorizontalStackPanel.Widgets.Add(new Label() { Text = "Score: " , Background  = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)});
 			HorizontalStackPanel.Widgets.Add(_Score);
 
 			//Time
 
 			_Time = new Label();
 			_Time.Text = "0";
+			_Time.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
+
 			var HorizontalStackPanel1 = new HorizontalStackPanel();
-			HorizontalStackPanel1.Widgets.Add(new Label() { Text = "Time: "});
+			HorizontalStackPanel1.Widgets.Add(new Label() { Text = "Time: " , Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray) });
 			HorizontalStackPanel1.Widgets.Add(_Time);
 
 			VerticalStackPanel.Widgets.Add(HorizontalStackPanel);

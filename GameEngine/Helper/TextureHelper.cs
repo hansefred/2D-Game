@@ -11,16 +11,16 @@ namespace GameEngine.Helper
     {
         public static Vector2 GetScale (Rectangle textureSize, Vector2 size)
         {
-            Vector2 scale = new Vector2(1, 1);
+            Vector2 scale = new Vector2(10, 10);
 
             while ((textureSize.Height*scale.Y) > size.Y)
             {
-                scale.Y = scale.Y - 0.01f;
+                scale.Y = scale.Y - 0.001f;
 
             }
             while ((textureSize.Width * scale.X) > size.X)
             {
-                scale.X = scale.X - 0.01f;
+                scale.X = scale.X - 0.001f;
 
             }
 
