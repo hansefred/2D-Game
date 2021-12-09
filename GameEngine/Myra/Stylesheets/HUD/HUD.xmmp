@@ -1,0 +1,19 @@
+<Project>
+  <Project.ExportOptions />
+  <Grid ShowGridLines="False" GridLinesColor="#FFCC01FF">
+    <Grid.RowsProportions>
+      <Proportion Type="Part" Value="5" />
+      <Proportion Type="Part" Value="60" />
+      <Proportion Type="Part" Value="5" />
+    </Grid.RowsProportions>
+     <HorizontalStackPanel GridRow="0">
+      <Label Text="Score:" />
+      <Label Text="100" />
+    </HorizontalStackPanel>
+    <HorizontalStackPanel GridRow="2">
+      <Label Text="2" />
+      <Label Text="x" />
+      <Image Renderable="Resource/Life.png" MinWidth="10" MaxWidth="50" MinHeight="10" MaxHeight="50" />
+    </HorizontalStackPanel>
+  </Grid>
+</Project>
