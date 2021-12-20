@@ -13,7 +13,7 @@ namespace GameEngine.Model.MapDefinitions
     [KnownType(typeof(Map_Wall))]
     public class Map_Object
     {
-        #region private
+        #region public
 
         [DataMemberAttribute()]
         public Vector2 MapPosition { get; set; }

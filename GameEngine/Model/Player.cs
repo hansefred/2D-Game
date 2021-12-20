@@ -18,10 +18,7 @@ namespace GameEngine.Model
 
         #region Konstruktor
 
-        public Player()
-        {
-            
-        }
+
 
 
         public Player(Vector2 position, Vector2 size, float speed, Vector2 direction, int hitPoint, Animation defaultAnimation,Animation onDestroyAnimation) : base(position,size,speed,direction,hitPoint, defaultAnimation,onDestroyAnimation)

@@ -6,12 +6,12 @@ using System.Text;
 
 namespace GameEngine.Model
 {
-    public class DestroyableGameObjects : GameObject
+    public class DestroyableGameObjects : CollidingGameObject
     {
 
         #region Public
         public Animation OnDestroyAnimation { get; set; }
-        public Rectangle BoxCollider { get { return new Rectangle((int)Position.X, (int)Position.Y, (int)_size.X, (int)_size.Y); } }
+
 
         public int HitPoint { get; set; }
 
@@ -27,12 +27,8 @@ namespace GameEngine.Model
 
         #region Konstruktor
 
-        public DestroyableGameObjects()
-        {
 
-        }
-
-        public DestroyableGameObjects(Vector2 position, Vector2 size, float speed, Vector2 direction, int hitPoint,Animation defaultAnimation, Animation onDestroyAnimation): base(position,size,speed,direction,defaultAnimation,1)
+        public DestroyableGameObjects(Vector2 position, Vector2 size, float speed, Vector2 direction, int hitPoint,Animation defaultAnimation, Animation onDestroyAnimation): base (position, size, speed, direction, defaultAnimation,1)
         {
             OnDestroyAnimation = onDestroyAnimation;
             HitPoint = hitPoint;
@@ -64,11 +60,14 @@ namespace GameEngine.Model
 
         public void CheckHit(DestroyableGameObjects gameObject)
         {
-            if (BoxCollider.Intersects(gameObject.BoxCollider))
+            if (base.CheckHit(gameObject))
             {
                 Hit();
                 gameObject.Hit();
             }
+
+
+
         }
 
         #endregion

@@ -1,0 +1,30 @@
+﻿<Application x:Class="MapEditor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MapEditor"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate x:Name="Spawner" x:Key="Spawner">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="MaxEnemy"></Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding MaxEnemy}" ></TextBox>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Spawning Time in Sec"></Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SpawningTimeinSec}"></TextBox>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+            <DataTemplate x:Key="Wall">
+            </DataTemplate>
+        <DataTemplate x:Key="Default">
+        </DataTemplate>
+    </Application.Resources>
+</Application>
