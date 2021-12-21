@@ -52,6 +52,10 @@ namespace GameEngine.Service
         {
             foreach (GameObject gameObject in _gameObjects.OrderBy ( o => o.Layer))
             {
+                if (gameObject is Spawner)
+                {
+                    gameObject.ToString();
+                }
               
                 gameObject.Render(_spriteBatch);
              

@@ -85,7 +85,7 @@ namespace GameEngine
             _uiService = _container.Resolve<UIService>();
             _uiService.ChangeUI(new IngameHUD(_container.Resolve<Game1>(),_container.Resolve<GameObjectManager>().GetPlayer()));
 
-            var map = Map.LoadMap("Test", this);
+            var map = Map.LoadMap("TestMap", this);
             map.MapObjects.ForEach(o => _gameObjecManager.Add(o));
 
             // TODO: use this.Content to load your game content here

@@ -40,6 +40,9 @@
     <None Update="Content\Player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Map\TestMap.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Map\Test_definition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

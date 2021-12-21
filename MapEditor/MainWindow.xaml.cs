@@ -1,7 +1,10 @@
-﻿using GameEngine.Model.MapDefinitions;
+﻿using GameEngine.Model;
+using GameEngine.Model.MapDefinitions;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -160,23 +163,65 @@ namespace MapEditor
 
         private void SetSpawnerType (WPFMapObject wPFMapObject)
         {
-            if (lb_SelectType.SelectedItem is SpawnerType)
+
+            if (wPFMapObject.MapType is SpawnerType)
             {
-                var spawner = lb_SelectType.SelectedItem as SpawnerType;
-                wPFMapObject.MapType = spawner;
+                var output = lb_SelectType.SelectedItem as SpawnerType;
+                wPFMapObject.MapType = output;
             }
-            else  if (lb_SelectType.SelectedItem is WallType)
+            else if (wPFMapObject.MapType is WallType)
             {
-                var wall = lb_SelectType.SelectedItem as WallType;
-                wPFMapObject.MapType = wall;
+                var output = lb_SelectType.SelectedItem as WallType;
+                wPFMapObject.MapType = output;
             }
             else
             {
-                var type = lb_SelectType.SelectedItem as MapType;
-                wPFMapObject.MapType = type;
+                var output = lb_SelectType.SelectedItem as MapType;
+                wPFMapObject.MapType = output;
             }
+
+
+        
+        }
+
+        private void Button_SaveMap_Click(object sender, RoutedEventArgs e)
+        {           
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON file (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog.ShowDialog();
+
+            var filepath = saveFileDialog.FileName;
+            var DirPath = System.IO.Path.GetDirectoryName(filepath);
+            if (!Directory.Exists(DirPath))
+            {
+                Directory.CreateDirectory(DirPath);
+            }
+
+            var Definition = new MapDefinition () { Name = filepath.Substring(filepath.LastIndexOf("\\")+1,filepath.LastIndexOf(".")- filepath.LastIndexOf("\\")-1), MapObjects = ExportToMapObjects (), MapSizeX = SizeX, MapSizeY = SizeY };
+
+            Definition.MapSizeX = 1;
+            Definition.MapSizeY = 1;
+
+            Map.SaveMap (DirPath, Definition);
+
+            
+            
+
+
         }
 
 
+
+        private List<Map_Object> ExportToMapObjects ()
+        {
+            var output = new List<Map_Object>();
+
+            foreach (var element in WPFMapObjects)
+            {
+                output.Add(element.ToMap_Object());
+            }
+
+            return output;
+        }
     }
 }

@@ -55,6 +55,12 @@ namespace GameEngine.Model.MapDefinitions
                     });
 
                 }
+                else if (obj is Map_Wall)
+                {
+                    map.MapObjects.Add(new CollidingGameObject(new Vector2(TextureSizeX * obj.MapPosition.X - ((TextureSizeX) / 2), TextureSizeY * obj.MapPosition.Y - ((TextureSizeY) / 2)),
+                        new Vector2(RenderSizeX, RenderSizeY), 0, new Vector2(0), animation));
+                   
+                }
                 else
                 {
                     map.MapObjects.Add(new GameObject()

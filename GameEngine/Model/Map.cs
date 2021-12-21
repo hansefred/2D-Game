@@ -45,7 +45,7 @@ namespace GameEngine.Model
         public static Map LoadMap(string MapDefintion, Game game)
         {
 
-            string definitionfile = $@"Map\{MapDefintion}_definition.json";
+            string definitionfile = $@"Map\{MapDefintion}.json";
             MapDefinition mapDefinitions = null;
 
             using (FileStream fs = new FileStream(definitionfile, FileMode.Open, FileAccess.Read))
@@ -61,9 +61,10 @@ namespace GameEngine.Model
 
         }
 
-        public static void SaveMap(string MapDefintion, MapDefinition map)
+        public static void SaveMap(string Destination, MapDefinition map)
         {
-            string definitionfile = $@"Map\{MapDefintion}_definition.json";
+            var definitionfile = Path.Combine(Destination, $"{map.Name}.json");
+            
 
 
 
