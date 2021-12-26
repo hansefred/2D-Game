@@ -46,7 +46,7 @@ namespace MapEditor
 
             InitializeComponent();
             MapTypes.Add(new MapType() { Name = "Default", Color = Brushes.Transparent });
-            MapTypes.Add(new MapType() { Name = "Wall", Color = Brushes.Black });
+            MapTypes.Add(new WallType() { Name = "Wall", Color = Brushes.Black });
             MapTypes.Add(new SpawnerType() { Name = "Spawner", Color = Brushes.Red });
 
 
@@ -126,7 +126,7 @@ namespace MapEditor
             if (lb_SelectType.SelectedItem != null && LeftMouseSelected != null)
             {
 
-                SetSpawnerType (LeftMouseSelected);
+                SetMapType(LeftMouseSelected);
 
                         
             }
@@ -136,7 +136,7 @@ namespace MapEditor
         {
             foreach (var item in RighMouseSelected)
             {
-                SetSpawnerType(item);
+                SetMapType(item);
             }
 
         }
@@ -161,23 +161,23 @@ namespace MapEditor
             return  WPFMapObjects.Where(o => o.X == col && o.Y == row).First();
         }
 
-        private void SetSpawnerType (WPFMapObject wPFMapObject)
+        private void SetMapType (WPFMapObject wPFMapObject)
         {
 
             if (wPFMapObject.MapType is SpawnerType)
             {
                 var output = lb_SelectType.SelectedItem as SpawnerType;
-                wPFMapObject.MapType = output;
+                wPFMapObject.MapType = output.ShallowCopy();
             }
             else if (wPFMapObject.MapType is WallType)
             {
                 var output = lb_SelectType.SelectedItem as WallType;
-                wPFMapObject.MapType = output;
+                wPFMapObject.MapType = output.ShallowCopy();
             }
             else
             {
                 var output = lb_SelectType.SelectedItem as MapType;
-                wPFMapObject.MapType = output;
+                wPFMapObject.MapType = output.ShallowCopy();
             }
 
 

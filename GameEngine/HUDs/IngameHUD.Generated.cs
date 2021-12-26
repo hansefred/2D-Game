@@ -27,11 +27,12 @@ namespace GameEngine.HUDs
 		private readonly Game1 _game;
 		private readonly Player _player;
 
-        #endregion
+		#endregion
 
-        #region UIComponent
-		private Label _Score;
-		private Label _Time;
+		#region UIComponent
+		private Label _frames;
+		private Label _score;
+		private Label _time;
 
 		private HorizontalStackPanel _healthBar;
 		private TextureRegion _healthTexture;
@@ -52,8 +53,9 @@ namespace GameEngine.HUDs
 		public void Update (GameTime gametime)
         {
 			
-			_Score.Text = _game.GameData.Score.ToString();
-			_Time.Text = _game.GameData.IngameTime.ToString(@"hh\:mm\:ss");
+			_score.Text = _game.GameData.GetScore().ToString();
+			_time.Text = _game.GameData.GetGameTime().ToString(@"hh\:mm\:ss");
+			_frames.Text = _game.GameData.GetFramesperSecond().ToString();
 
 
 			_healthBar.Widgets.Clear();
@@ -70,26 +72,33 @@ namespace GameEngine.HUDs
 
 			var VerticalStackPanel = new VerticalStackPanel();
 
-			//Score
-			_Score = new Label();
-			_Score.Text = "0";
-			_Score.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
+			//Frames
+			_frames = new Label();
+			_frames.Text = "0";
+			_frames.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
 			var HorizontalStackPanel = new HorizontalStackPanel();
-			HorizontalStackPanel.Widgets.Add(new Label() { Text = "Score: " , Background  = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)});
-			HorizontalStackPanel.Widgets.Add(_Score);
+			HorizontalStackPanel.Widgets.Add(new Label() { Text = "Frames: ", Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray) });
+			HorizontalStackPanel.Widgets.Add(_frames);
+
+			//Score
+			_score = new Label();
+			_score.Text = "0";
+			_score.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
+			var HorizontalStackPanel2 = new HorizontalStackPanel();
+			HorizontalStackPanel2.Widgets.Add(new Label() { Text = "Score: " , Background  = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)});
+			HorizontalStackPanel2.Widgets.Add(_score);
 
 			//Time
-
-			_Time = new Label();
-			_Time.Text = "0";
-			_Time.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
-
+			_time = new Label();
+			_time.Text = "0";
+			_time.Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray);
 			var HorizontalStackPanel1 = new HorizontalStackPanel();
 			HorizontalStackPanel1.Widgets.Add(new Label() { Text = "Time: " , Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray) });
-			HorizontalStackPanel1.Widgets.Add(_Time);
+			HorizontalStackPanel1.Widgets.Add(_time);
 
 			VerticalStackPanel.Widgets.Add(HorizontalStackPanel);
 			VerticalStackPanel.Widgets.Add(HorizontalStackPanel1);
+			VerticalStackPanel.Widgets.Add(HorizontalStackPanel2);
 
 
 

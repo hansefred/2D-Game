@@ -98,7 +98,7 @@ namespace GameEngine
 
             // TODO: Add your update logic here
 
-            GameData.IngameTime = GameData.IngameTime + gameTime.ElapsedGameTime;
+            GameData.Update(gameTime);
 
 
             _gameObjecManager.Update(gameTime);
